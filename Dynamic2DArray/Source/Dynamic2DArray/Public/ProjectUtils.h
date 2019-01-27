@@ -16,7 +16,7 @@ public:
 	bool isEquipped = false;
 };
 
-/** use a 1D-array of struct FPockets, each of them will store an 1D-array of FItems, to simulate a 2D-array. */
+/** use an 1D-array of struct FPockets, each of them will store an 1D-array of FItems, to simulate a 2D-array. */
 USTRUCT(BlueprintType)
 struct FPocket
 {
