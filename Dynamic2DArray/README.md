@@ -1,8 +1,8 @@
 # Dynamic 2D Array using TArray
 
-To simulate a 2D-array in Unreal Engine 4, follow the next steps.
+To simulate a 2D-array in Unreal Engine 4 to use in C++ and Blueprints, follow the next steps.
 
-## Create a UStruct that stores a TArray<> of whatever structs, classes or primitives
+## Create an UStruct that stores a TArray<> of whatever structs, classes or primitives
 
 ![alt text](Images/FItem.PNG)
 
