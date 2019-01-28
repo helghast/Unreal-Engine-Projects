@@ -28,6 +28,10 @@ If you need it, expose the properties of the structs as UPROPERTY to see them in
 
 ![alt text](Images/Iterate.PNG)
 
+![alt text](Images/IterateRaw.PNG)
+
+![alt text](Images/IterateEach.PNG)
+
 ## Iterate like a 2D-array in Blueprints
 
 ![alt text](Images/BP_Iterate.PNG)
