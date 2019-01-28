@@ -36,10 +36,10 @@ void ADummyActor::BeginPlay()
 	Inventory[1][2].isEquipped = true;
 
 	// get a non-const reference to an item and update it
-	FItem& Item = Inventory[1][3];
-	Item.isEquipped = true;
+	FItem& ItemRef = Inventory[1][3];
+	ItemRef.isEquipped = true;
 
-	// iterate
+	// iterate using iterators
 	for (TArray<FPocket>::TConstIterator ItPocket(Inventory); ItPocket; ++ItPocket)
 	{
 		for (TArray<FItem>::TConstIterator ItItem(ItPocket->Items); ItItem; ++ItItem)
@@ -53,6 +53,32 @@ void ADummyActor::BeginPlay()
 			// show message on the outputlog
 			UE_LOG(LogTemp, Log, TEXT("%s"), *Msg);
 		}
+	}
+
+	// iterate using raw forloops
+	for (int32 i = 0; i < Inventory.Num(); ++i)
+	{
+		for (int32 j = 0; j < Inventory[i].Items.Num(); ++j)
+		{
+			// show message on the screen
+			const FString Str = UKismetStringLibrary::Conv_BoolToString(Inventory[i][j].isEquipped);
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("[%d][%d].isEquipped = %s"), i, j, *Str));
+		}
+	}
+
+	// iterate using for each loop
+	int32 i = 0;
+	for (const FPocket& Pocket : Inventory)
+	{
+		int32 j = 0;
+		for (const FItem& Item : Pocket.Items)
+		{
+			// show message on the screen
+			const FString Str = UKismetStringLibrary::Conv_BoolToString(Item.isEquipped);
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::Printf(TEXT("[%d][%d].isEquipped = %s"), i, j, *Str));
+			i++;
+		}
+		j++;
 	}
 }
 
