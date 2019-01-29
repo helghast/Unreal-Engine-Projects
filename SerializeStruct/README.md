@@ -27,8 +27,11 @@ Example:
 ![alt text](Images/template.PNG)
 
 https://api.unrealengine.com/INT/API/Runtime/Json/Serialization/index.html
+
 https://api.unrealengine.com/INT/API/Runtime/Json/Serialization/FJsonSerializer/index.html
+
 https://api.unrealengine.com/INT/API/Runtime/JsonUtilities/FJsonObjectConverter/index.html
+
 https://forums.unrealengine.com/development-discussion/c-gameplay-programming/1561415-solved-json-serializing-and-deserializing-c
 
 ## Automation Tests in Unreal Engine 4
@@ -61,5 +64,7 @@ and a fileName.cpp to make some test:
 ![alt text](Images/automationtest5.PNG)
 
 https://docs.unrealengine.com/en-us/Programming/Automation
+
 https://docs.unrealengine.com/en-us/Programming/Automation/TechnicalGuide
+
 https://docs.unrealengine.com/en-us/Programming/Automation/UserGuide
