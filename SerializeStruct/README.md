@@ -48,13 +48,13 @@ and a fileName.cpp to make some test:
 
 -Debug project to check that the serialization from a UStruct to a JSONString is fine:
 
-![alt text](Images/automationtest2.PNG)
+![alt text](Images/automationtest2.png)
 
 ![alt text](Images/automationtest3.PNG)
 
 -Debug deserialization:
 
-![alt text](Images/automationtest4.PNG)
+![alt text](Images/automationtest4.png)
 
 -launch your custom Automation Test:
 
