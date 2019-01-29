@@ -38,9 +38,15 @@ https://forums.unrealengine.com/development-discussion/c-gameplay-programming/15
 -check that the serialization process has been correct using the Automation tests. You need to create a "Test" folder in the Source/Private path 
 and a fileName.cpp to make some test:
 
+-create a dummy class that will fill our Struct with dummy data:
+
+![alt text](Images/automationtest6.PNG)
+
+-implement simple automation test method:
+
 ![alt text](Images/automationtest1.PNG)
 
--Debug project to check that the serialization from a UStruct to a JSONString is fine
+-Debug project to check that the serialization from a UStruct to a JSONString is fine:
 
 ![alt text](Images/automationtest2.PNG)
 
@@ -50,7 +56,7 @@ and a fileName.cpp to make some test:
 
 ![alt text](Images/automationtest4.PNG)
 
--launch your custom Automation Test.
+-launch your custom Automation Test:
 
 ![alt text](Images/automationtest5.PNG)
 
