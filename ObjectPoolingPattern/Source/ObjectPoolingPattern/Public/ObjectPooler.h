@@ -21,12 +21,19 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = Pooler)
 	TArray<FPool> pools;
 
-	class AMyStaticMeshActor* SpawnFromPool(const EObjectType tag, const FVector& position, const FQuat& rotation);
+	class IPooledObject* SpawnFromPool(const EObjectType tag, const FVector& position, const FQuat& rotation);
+
+	bool IsFinished() const
+	{
+		return bFinished;
+	}
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 private:
-	TMap<EObjectType, TQueue<class AMyStaticMeshActor*>* > poolDictionary;
+	TMap<EObjectType, TQueue<class IPooledObject*>* > poolDictionary;
+
+	bool bFinished;
 };

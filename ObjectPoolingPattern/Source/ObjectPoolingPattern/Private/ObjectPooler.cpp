@@ -4,7 +4,7 @@
 #include "MyStaticMeshActor.h"
 
 // Sets default values
-AObjectPooler::AObjectPooler()
+AObjectPooler::AObjectPooler() : bFinished(false)
 {
 
 }
@@ -14,31 +14,30 @@ void AObjectPooler::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	for (const FPool& pool : pools)
+	for (TArray<FPool>::TConstIterator It(pools); It; ++It)
 	{
-		TQueue<AMyStaticMeshActor*>* objectPool = new TQueue<AMyStaticMeshActor*>();
+		TQueue<IPooledObject*>* objectPool = new TQueue<IPooledObject*>();
 
-		for (int32 i = 0; i < pool.size; ++i)
+		for (int32 i = 0; i < It->size; ++i)
 		{
 			struct FActorSpawnParameters SpawnParams;
 			SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 
-			AMyStaticMeshActor* obj = GetWorld()->SpawnActor<AMyStaticMeshActor>(pool.prefab, GetActorLocation(), FRotator::ZeroRotator, SpawnParams);
+			IPooledObject* obj = GetWorld()->SpawnActor<AMyStaticMeshActor>(It->prefab, GetActorLocation(), FRotator::ZeroRotator, SpawnParams);
 			if (obj)
 			{
-				obj->SetActorHiddenInGame(true);
-				obj->SetActorEnableCollision(false);
-				obj->SetActorTickEnabled(false);
-
+				obj->OnSetBaseProperties(true, false, false);
 				objectPool->Enqueue(obj);
-			}	
+			}
 		}
 
-		poolDictionary.Add(pool.tag, objectPool);
+		poolDictionary.Add(It->tag, objectPool);
 	}
+
+	bFinished = true;
 }
 
-AMyStaticMeshActor* AObjectPooler::SpawnFromPool(const EObjectType tag, const FVector& position, const FQuat& rotation)
+IPooledObject* AObjectPooler::SpawnFromPool(const EObjectType tag, const FVector& position, const FQuat& rotation)
 {
 	if (!poolDictionary.Contains(tag))
 	{
@@ -46,19 +45,13 @@ AMyStaticMeshActor* AObjectPooler::SpawnFromPool(const EObjectType tag, const FV
 		return nullptr;
 	}
 
-	AMyStaticMeshActor* objectToSpawn = nullptr;
+	IPooledObject* objectToSpawn = nullptr;
 	const bool dequed = poolDictionary[tag]->Dequeue(objectToSpawn);
 	if (dequed && objectToSpawn)
 	{
-		objectToSpawn->SetActorHiddenInGame(false);
-		objectToSpawn->SetActorEnableCollision(true);
-		objectToSpawn->SetActorLocationAndRotation(position, rotation);
-
-		// try use interface implementation
-		if (IPooledObject* objImplementation = Cast<IPooledObject>(objectToSpawn))
-		{
-			objImplementation->OnObjectSpawn();
-		}
+		objectToSpawn->OnSetBaseProperties(false, true, false);
+		objectToSpawn->OnSetLocationAndRotation(position, rotation);
+		objectToSpawn->OnObjectSpawn();
 
 		poolDictionary[tag]->Enqueue(objectToSpawn);
 

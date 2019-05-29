@@ -29,4 +29,9 @@ public:
 
 	UFUNCTION()
 	void OnObjectSpawn() override;
+
+	UFUNCTION()
+	void OnSetBaseProperties(const bool Visible = false, const bool Collision = false, const bool Tick = false) override;
+	UFUNCTION()
+	void OnSetLocationAndRotation(const FVector& position = FVector(), const FQuat& rotation = FQuat()) override;
 };

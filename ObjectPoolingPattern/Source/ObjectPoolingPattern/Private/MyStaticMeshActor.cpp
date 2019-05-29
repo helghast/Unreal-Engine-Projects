@@ -24,3 +24,14 @@ void AMyStaticMeshActor::OnObjectSpawn()
 	}
 }
 
+void AMyStaticMeshActor::OnSetBaseProperties(const bool Visible /*= false*/, const bool Collision /*= false*/, const bool Tick /*= false*/)
+{
+	SetActorHiddenInGame(Visible);
+	SetActorEnableCollision(Collision);
+	SetActorTickEnabled(Tick);
+}
+
+void AMyStaticMeshActor::OnSetLocationAndRotation(const FVector& position /*= FVector()*/, const FQuat& rotation /*= FQuat()*/)
+{
+	SetActorLocationAndRotation(position, rotation.GetNormalized());
+}

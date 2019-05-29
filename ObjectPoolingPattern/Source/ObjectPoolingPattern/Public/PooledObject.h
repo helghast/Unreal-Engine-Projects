@@ -24,4 +24,8 @@ class OBJECTPOOLINGPATTERN_API IPooledObject
 public:
 	UFUNCTION()
 	virtual void OnObjectSpawn() = 0;
+	UFUNCTION()
+	virtual void OnSetBaseProperties(const bool Visible = false, const bool Collision = false, const bool Tick = false) = 0;
+	UFUNCTION()
+	virtual void OnSetLocationAndRotation(const FVector& position = FVector(), const FQuat& rotation = FQuat()) = 0;
 };

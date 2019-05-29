@@ -5,9 +5,9 @@
 #include "PoolUtils.h"
 
 // Sets default values
-AObjectSpawner::AObjectSpawner() 
-	: pooler(nullptr),
-	DefaultType(EObjectType::Cube)
+AObjectSpawner::AObjectSpawner()
+	: DefaultType(EObjectType::Cube),
+	pooler(nullptr)
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -32,7 +32,7 @@ void AObjectSpawner::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (pooler)
+	if (pooler && pooler->IsFinished())
 	{
 		pooler->SpawnFromPool(DefaultType, GetActorLocation(), FQuat::Identity);
 	}
